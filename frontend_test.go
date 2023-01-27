@@ -30,6 +30,9 @@ import (
 func dialer() func(context.Context, string) (net.Conn, error) {
 	listener := bufconn.Listen(1024 * 1024)
 	server := grpc.NewServer()
+	PluginFrontendNvme.subsystems = make(map[string]*pb.NVMeSubsystem)
+	PluginFrontendNvme.controllers = make(map[string]*pb.NVMeController)
+	PluginFrontendNvme.namespaces = make(map[string]*pb.NVMeNamespace)
 	pb.RegisterFrontendNvmeServiceServer(server, &PluginFrontendNvme)
 
 	go func() {

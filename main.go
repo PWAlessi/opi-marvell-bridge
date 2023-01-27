@@ -16,7 +16,9 @@ import (
 )
 
 var (
-	port = flag.Int("port", 50051, "The server port")
+	rpcID   int32 // json request message ID, auto incremented
+	port    = flag.Int("port", 50051, "The server port")
+	rpcSock = flag.String("mrvl_rpc_sock", "/var/tmp/spdk.sock", "Path to SPDK JSON RPC socket")
 )
 
 func main() {
